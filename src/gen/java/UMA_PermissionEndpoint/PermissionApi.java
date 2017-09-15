@@ -8,7 +8,7 @@ import io.swagger.annotations.ApiParam;
 
 import UMA_PermissionEndpoint.dto.PTFailDTO;
 import UMA_PermissionEndpoint.dto.PTSuccessDTO;
-import UMA_PermissionEndpoint.dto.RequestedResourceDTO;
+import UMA_PermissionEndpoint.dto.ResourceDetailsDTO;
 
 import java.util.List;
 
@@ -38,7 +38,7 @@ public class PermissionApi  {
         @io.swagger.annotations.ApiResponse(code = 404, message = "Bad Request") })
 
     public Response registerPermission(@ApiParam(value = "" ,required=true )@HeaderParam("patToken") String patToken,
-    @ApiParam(value = "The requested resource."  ) RequestedResourceDTO requestedResource)
+    @ApiParam(value = "The requested resource."  ) ResourceDetailsDTO requestedResource)
     {
     return delegate.registerPermission(patToken,requestedResource);
     }

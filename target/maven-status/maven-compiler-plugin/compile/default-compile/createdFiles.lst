@@ -1,9 +1,9 @@
 UMA_PermissionEndpoint/factories/PermissionApiServiceFactory.class
 UMA_PermissionEndpoint/ApiResponseMessage.class
 UMA_PermissionEndpoint/PermissionApi.class
-UMA_PermissionEndpoint/dto/RequestedResourceDTO.class
 UMA_PermissionEndpoint/dto/PTSuccessDTO.class
 UMA_PermissionEndpoint/dto/PTFailDTO.class
+UMA_PermissionEndpoint/dto/ResourceDetailsDTO.class
 UMA_PermissionEndpoint/ApiException.class
 UMA_PermissionEndpoint/impl/PermissionApiServiceImpl.class
 UMA_PermissionEndpoint/PermissionApiService.class

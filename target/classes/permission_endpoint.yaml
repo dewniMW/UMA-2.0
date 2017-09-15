@@ -1,19 +1,17 @@
 swagger: '2.0'
 info:
-  title: Protection API
-  description: >-
-    The authorization server MUST present an HTTP-based protection API,
-    protected by TLS and OAuth (or an OAuth-based authentication protocol), for
-    use by resource servers. The authorization server thus has an OAuth token
-    endpoint and authorization endpoint. The authorization server MUST declare
-    all of its protection API endpoints in its configuration data.The protection
-    API consists of three endpoints namely Resource set registration endpoint,
-    Permission registration endpointToken and introspection endpoint.
+  title: Permission Endpoint
+  description: >
+    The resource server requests one or more permissions (resource identifiers
+    and corresponding scopes) with the authorization server on the client's
+    behalf. This process assumes that the client's request at the protected
+    resource had no token (or had an invalid RPT or insufficient permissions
+    associated with the RPT).
   version: 1.0.0
 schemes:
-  - http
-host: api.protection.com
-basePath: /v1
+  - https
+host: localhost
+basePath: /api/identity/oauth2/permission/v1.0
 consumes:
   - application/json
 produces:
@@ -37,29 +35,7 @@ paths:
           name: requested_resource
           description: The requested resource.
           schema:
-            type: object
-            required:
-              - resource_id
-              - resource_scopes
-            properties:
-              resource_id:
-                type: string
-                example: 7b727369647d
-                description: >
-                  The identifier for a resource to which the resource server is
-                  requesting permission on behalf of the client. The identifier
-                  MUST correspond to a resource that was previously registered.
-              resource_scopes:
-                type: array
-                example: 'view , http://photoz.example.com/dev/actions/print'
-                description: >
-                  An array referencing one or more identifiers of scopes to
-                  which the resource server is requesting access for this
-                  resource on behalf of the client. Each scope identifier MUST
-                  correspond to a scope that was previously registered by this
-                  resource server for the referenced resource.
-                items:
-                  type: string
+            $ref: '#/definitions/Resource_details'
       responses:
         '201':
           description: Created
@@ -86,3 +62,27 @@ definitions:
         example: invalid_resource_id or invalid_scope
     required:
       - error
+  Resource_details:
+    type: object
+    required:
+      - resource_id
+      - resource_scopes
+    properties:
+      resource_id:
+        type: string
+        example: 7b727369647d
+        description: >
+          The identifier for a resource to which the resource server is
+          requesting permission on behalf of the client. The identifier MUST
+          correspond to a resource that was previously registered.
+      resource_scopes:
+        type: array
+        example: '"view" , "http://photoz.example.com/dev/actions/print"'
+        description: >
+          An array referencing one or more identifiers of scopes to which the
+          resource server is requesting access for this resource on behalf of
+          the client. Each scope identifier MUST correspond to a scope that was
+          previously registered by this resource server for the referenced
+          resource.
+        items:
+          type: string
